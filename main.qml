@@ -2,6 +2,7 @@ import QtQuick 2.10
 import QtQuick.Window 2.10
 import QtQuick.Controls 2.3
 import QtCanvas3D 1.1
+import QtQuick.Layouts 1.3
 
 Window {
     id: window
@@ -9,42 +10,87 @@ Window {
     width: 1280
     height: 720
     color: "#3b3b3b"
-    title: qsTr("Hello World")
+    title: qsTr("3D Box Viewer")
 
-    Column {
-        id: columnId
-        anchors.rightMargin: 10
-        anchors.leftMargin: 10
-        anchors.bottomMargin: 10
-        anchors.topMargin: 10
-        anchors.fill: parent
+    RowLayout {
+        id: topBarId
+        implicitWidth: parent.width
+        height: 50
+        visible: true
 
         Rectangle {
-            id: rectangleID
-            width: columnId
-            height: 200
-            color: "#696969"
-            anchors.topMargin: 600
-            anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
+            id: rectangleId
+            color: "#424242"
+            Layout.columnSpan: 1
+            Layout.rowSpan: 1
             anchors.fill: parent
 
-            GroupBox {
-                id: groupBoxId
-                anchors.fill: parent
-                title: qsTr("Controls")
-
-                Grid {
-                    id: grid
-                    anchors.fill: parent
-                    rows: 3
-                    columns: 3
-
-                }
+            Text {
+                id: titleId
+                color: "#ffffff"
+                text: qsTr("3D Box Viewer")
+                font.family: "Verdana"
+                anchors.left: parent.left
+                anchors.leftMargin: 20
+                anchors.verticalCenter: parent.verticalCenter
+                font.pixelSize: 18
             }
+            Button {
+                id: exitButtonId
+                width: 30
+                height: 30
+                text: qsTr("X")
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.right: parent.right
+                anchors.rightMargin: 20
+            }
+        }
 
+    }
 
+    Row {
+        id: middleId
+        anchors.bottom: listcontainerId.top
+        anchors.top: topBarId.bottom
+        anchors.topMargin: 0
+        anchors.left: parent.left
+        anchors.right: parent.right
+        spacing: 10
+
+        Rectangle {
+            id: viewId
+            color: "#323232"
+            anchors.right: parent.right
+            anchors.rightMargin: 1280
+            anchors.left: parent.left
+            anchors.leftMargin: 0
+            anchors.top: titleId.bottom
+            anchors.topMargin: -520
+            height: parent.height
 
         }
+
+        Rectangle {
+            id: controlsId
+            width: parent.width/5
+            height: parent.height
+            color: "#223b4f"
+            anchors.right: parent.right
+            anchors.rightMargin: 0
+
+        }
+
+
+    }
+
+    Rectangle {
+        id: listcontainerId
+        width: parent.width
+        height: 150
+        color: "#424242"
+        border.width: 0
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 0
     }
 }
+

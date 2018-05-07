@@ -1,5 +1,9 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>glcode.js</file>
+        <file>three.js</file>
+        <file>TrackballControls.js</file>
+        <file>ControlEventSource.qml</file>
     </qresource>
 </RCC>

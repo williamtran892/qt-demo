@@ -12,6 +12,22 @@ Window {
     color: "#3b3b3b"
     title: qsTr("3D Box Viewer")
 
+
+//    value panel to be added later
+    //    Rectangle {
+//        id: valuePanel
+//        width: 150
+//        height: 100
+//        anchors.left: parent.left
+//        anchors.top: parent.top
+//        opacity: 0.3
+//        border.color: "black"
+//        border.width: 2
+//        radius: 5
+//        z: 1
+//    }
+
+
     RowLayout {
         id: topBarId
         implicitWidth: parent.width
@@ -79,6 +95,7 @@ Window {
             anchors.rightMargin: 0
 
         }
+
 
 
     }

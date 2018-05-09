@@ -197,6 +197,21 @@ Window {
             }
         }
 
+        Slider {
+            id: sliderId
+            anchors.rightMargin: 0
+            anchors.top: parent.top
+            anchors.right: controlsId.left
+            anchors.bottom: parent.bottom
+            anchors.left: parent.left
+            anchors.topMargin: 450
+            live: true
+            to: 180
+            from: -180
+            value: 0
+            onValueChanged: GLCode.onxPosChanged(value);
+        }
+        
         Rectangle {
             id: controlsId
             width: parent.width/5

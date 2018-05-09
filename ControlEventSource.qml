@@ -62,7 +62,7 @@ Item {
         } else if (event === 'mousedown') {
             ctrlEventSource.mouseDown.connect(handler);
         } else if (event === 'mouseup') {
-            ctrlEventSource.mouseUp.connect(handler);
+           ctrlEventSource.mouseUp.connect(handler);
         } else if (event === 'mousemove') {
             ctrlEventSource.mouseMove.connect(handler);
         } else if (event === 'mousewheel') {

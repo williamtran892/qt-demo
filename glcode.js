@@ -5,6 +5,7 @@ Qt.include("TrackballControls.js")
 
 var camera, controls, scene, renderer, eventSourceArea;
 var objects = [], plane;
+var xPos = 0;
 
 var mouse = new THREE.Vector2(),
 offset = new THREE.Vector3(),
@@ -51,13 +52,13 @@ function initializeGL(canvas, eventSource) {
 
         object.material.ambient = object.material.color;
 
-        object.position.x = Math.random() * 1000 - 500;
-        object.position.y = Math.random() * 600 - 300;
-        object.position.z = Math.random() * 800 - 400;
+        object.position.x = 0;
+        object.position.y = 0;
+        object.position.z = 0;
 
-        object.rotation.x = Math.random() * 2 * Math.PI;
-        object.rotation.y = Math.random() * 2 * Math.PI;
-        object.rotation.z = Math.random() * 2 * Math.PI;
+        object.rotation.x = 45;
+        object.rotation.y = 45;
+        object.rotation.z = 45;
 
         object.scale.x = Math.random() * 2 + 1;
         object.scale.y = Math.random() * 2 + 1;
@@ -175,10 +176,42 @@ function onDocumentMouseUp( x, y ) {
     eventSourceArea.cursorShape = Qt.ArrowCursor;
 }
 
+function onxPosChanged(value){
+    xPos = value;
+}
+
+var matrix = new THREE.Matrix4();
+var oldValue = 0;
+
 function paintGL(canvas) {
 
     controls.update();
 
+    camera.rotation.y = xPos * Math.PI / 180;
+//    if (xPos != oldValue){
+
+//        matrix.makeRotationY( (xPos - oldValue) * Math.PI / 180 );
+//        camera.position.applyMatrix4(matrix);
+//    camera.position.x = scene.position.x + 1 * Math.cos( xPos * Math.PI / 180 );
+//    camera.position.z = scene.position.y + 1 * Math.sin( xPos * Math.PI / 180 );
+//        camera.lookAt(scene.position);
+//        oldValue = xPos;
+//    }
     renderer.render( scene, camera );
 
+}
+
+function moveEye(xRot, yRot, distance) {
+    var xAngle = degToRad(xRot);
+    var yAngle = degToRad(yRot);
+
+    var zPos = distance * Math.cos(xAngle) * Math.cos(yAngle);
+    var xPos = distance * Math.sin(xAngle) * Math.cos(yAngle);
+    var yPos = distance * Math.sin(yAngle);
+
+    return [-xPos, yPos, zPos];
+}
+
+function degToRad(degrees) {
+    return degrees * Math.PI / 180;
 }
